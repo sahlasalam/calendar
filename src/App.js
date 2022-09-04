@@ -23,8 +23,10 @@ function App() {
   var date= currentDate.getDate();
 
   useMemo(() => {
+    console.log("currrent--------------------------",currentMonth)
+    console.log("currrent--------------------------",currentYear)
     var date= currentDate.getDate();
-
+    console.log("currrent--------------------------date",currentDate)
     var firstDay= new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
   
     var lastDay= new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDay();
@@ -56,9 +58,8 @@ for(var l=lastDay+1; l<=6; ++l){
  groups= dayInCalendar.map((e,i)=>{
   return i%7 === 0 ? dayInCalendar.slice(i, i+7): null;
 }).filter(e=>{return e;});
-// console.log(groups);
-   
-  }, [currentMonth, currentYear])
+
+  }, [currentDate])
   
 
 
@@ -75,24 +76,41 @@ for(var l=lastDay+1; l<=6; ++l){
     }
       )
 } 
-console.log("before",currentMonth);
- const nextMonth= useCallback(()=>{
-   setCurrentMonth(currentMonth+1);
-   console.log("after",currentMonth);
-   setCurrentDate(new Date(currentYear,currentMonth))
+
+const nextMonth= useCallback(()=>{
+  if(currentMonth+1===12){
+    setCurrentMonth(0)
+    setCurrentYear(currentYear+1)
+    setCurrentDate(new Date(currentYear+1,0,date))
+  }
+  else{
+    setCurrentMonth(currentMonth+1);
+    setCurrentDate(new Date(currentYear,currentMonth+1, date))
+ 
+  }
   },[currentMonth])
 
 const prevMonth= useCallback(()=>{
-  setCurrentMonth(currentMonth-1)
-  setCurrentDate(new Date(currentYear,currentMonth))
+  if(currentMonth===0){
+    setCurrentMonth(11)
+    setCurrentYear(currentYear-1)
+    setCurrentDate(new Date(currentYear-1,11,date))
+  }
+  else{
+    setCurrentMonth(currentMonth-1)
+    setCurrentDate(new Date(currentYear,currentMonth-1, date))
+  
+  }
 }, [currentMonth])
 
 const nextYear= useCallback(()=>{
   setCurrentYear(currentYear+1)
+  setCurrentDate(new Date(currentYear+1,currentMonth, date))
 },[currentYear])
 
 const prevYear= useCallback(()=>{
   setCurrentYear(currentYear-1)
+  setCurrentDate(new Date(currentYear-1,currentMonth,date))
 }, [currentYear])
 
 
