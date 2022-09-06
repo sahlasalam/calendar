@@ -7,10 +7,10 @@ function Month({currentMonth, nextMonth, prevMonth}) {
 
   return (
     <div>
-        <div>
-            <h1>{monthInYear[currentMonth]}</h1>
-            <button onClick={prevMonth}>Prev</button>
-            <button onClick={nextMonth}>Next</button>
+        <div className='month'>
+            <button onClick={prevMonth} className='button'>Prev</button>
+            <h1 >{monthInYear[currentMonth]}</h1>
+            <button onClick={nextMonth} className='button'>Next</button>
 
         </div>
 

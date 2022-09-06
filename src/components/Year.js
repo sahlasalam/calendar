@@ -3,11 +3,10 @@ import React from 'react'
 function Year({currentYear, nextYear, prevYear}) {
 
   return (
-    <div>
+    <div className='month'>
+        <button onClick={prevYear} className='button'>Prev</button>
         <h1>{currentYear}</h1>
-        <button onClick={prevYear}>Prev</button>
-        <button onClick={nextYear}>Next</button>
-
+        <button onClick={nextYear} className='button'>Next</button>
     </div>
   )
 }

@@ -8,12 +8,12 @@ import {useCallback, useEffect, useState, useMemo} from 'react';
 function App() {
   // const [dayInCalendar, setDayInCalendar] = useState([]);
 
-  const prevday= [];
-  const prevPadDay= [];
-  const nextDay= [];
-  const nextPadDay= [];
-  var groups= [];
-  var dayInCalendar= [];
+  const prevday = [];
+  const prevPadDay = [];
+  const nextDay = [];
+  const nextPadDay = [];
+  var groups = [];
+  var dayInCalendar = [];
 
 
   const [currentDate , setCurrentDate]= useState(new Date());
@@ -23,10 +23,10 @@ function App() {
   var date= currentDate.getDate();
 
   useMemo(() => {
-    console.log("currrent--------------------------",currentMonth)
-    console.log("currrent--------------------------",currentYear)
-    var date= currentDate.getDate();
-    console.log("currrent--------------------------date",currentDate)
+    // console.log("currrent--------------------------",currentMonth)
+    // console.log("currrent--------------------------",currentYear)
+    // var date= currentDate.getDate();
+    // console.log("currrent--------------------------date",currentDate)
     var firstDay= new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
   
     var lastDay= new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDay();
@@ -88,7 +88,7 @@ const nextMonth= useCallback(()=>{
     setCurrentDate(new Date(currentYear,currentMonth+1, date))
  
   }
-  },[currentMonth])
+  },[currentMonth,currentYear])
 
 const prevMonth= useCallback(()=>{
   if(currentMonth===0){
@@ -101,17 +101,17 @@ const prevMonth= useCallback(()=>{
     setCurrentDate(new Date(currentYear,currentMonth-1, date))
   
   }
-}, [currentMonth])
+}, [currentMonth, currentYear])
 
 const nextYear= useCallback(()=>{
   setCurrentYear(currentYear+1)
   setCurrentDate(new Date(currentYear+1,currentMonth, date))
-},[currentYear])
+},[currentYear, currentMonth])
 
 const prevYear= useCallback(()=>{
   setCurrentYear(currentYear-1)
   setCurrentDate(new Date(currentYear-1,currentMonth,date))
-}, [currentYear])
+}, [currentYear, currentMonth])
 
 
   return (
